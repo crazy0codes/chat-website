@@ -1,0 +1,10 @@
+.roomsList::-webkit-scrollbar {
+    width: 4px;
+    border-radius: 4px;
+    background-color: rgb(190, 187, 187);
+}
+
+.roomsList::-webkit-scrollbar-thumb {
+    background-color: rgb(225, 222, 222);
+    border-radius: 4px
+}

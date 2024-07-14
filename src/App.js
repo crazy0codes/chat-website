@@ -1,11 +1,18 @@
+import { useEffect } from 'react';
 import './App.css';
-import { LoginForm } from './pages/LoginForm';
 import { Dashboard } from './pages/Dashboard';
-import { Chat } from './components/ui/chatBox';
+import { io } from 'socket.io-client';
+
+export const socket = io('http://localhost:3001');
 
 function App() {
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+  }, []);
   return (
-    <Dashboard/>
+    <Dashboard />
   );
 }
 
