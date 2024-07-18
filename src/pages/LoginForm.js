@@ -1,5 +1,3 @@
-
-
 import { Button } from "../components/ui/button"
 import {
     Card,
@@ -11,7 +9,33 @@ import {
 import { Input } from "../components/ui/input"
 import { Label } from "../components/ui/label"
 
-export function LoginForm() {
+
+export function LoginForm({props}) {
+    let {setToken} = props
+    async function handleLogin() {
+        let email = document.querySelector('#email').value;
+        let password = document.querySelector('#password').value;
+        let jwtToken = sessionStorage.getItem('token') || null;
+        console.log("jwtToken =>", jwtToken)
+        const data = await fetch(`http://localhost:3001/login?email=${email}@sves.org.in&password=${password}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': jwtToken ? `Bearer ${jwtToken}` : null
+            },
+        });
+        if(data.status == 200){
+            const jsonData = await data.json();
+            console.log(jsonData)
+            const {validUser} = jsonData
+            sessionStorage.setItem('token',jsonData.token);
+            setToken(validUser)
+        }
+        else{
+            console.log("SERVER CONNECTION => ERROR")
+        }
+    }
+
     return (
         <div className="h-screen flex">
             <Card className="mx-auto my-auto max-w-sm ">
@@ -41,7 +65,7 @@ export function LoginForm() {
                             </div>
                             <Input id="password" type="password" required />
                         </div>
-                        <Button type="submit" className="w-full">
+                        <Button type="submit" className="w-full" onClick={handleLogin}>
                             Login
                         </Button>
                     </div>

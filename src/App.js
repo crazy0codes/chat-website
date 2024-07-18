@@ -1,19 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { Dashboard } from './pages/Dashboard';
-import { io } from 'socket.io-client';
-
-export const socket = io('http://localhost:3001');
+import { LoginForm } from './pages/LoginForm';
 
 function App() {
+  
+  const [token, setToken] = useState(null);
+
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log('Connected to server');
-    });
+    let token = sessionStorage.getItem('token')
+    console.log(token)
+    if (Boolean(token)) {
+      setToken(Boolean(token))
+    }
   }, []);
+
   return (
-    <Dashboard />
-  );
+    <>
+      {console.log("Token :", token)}
+      {!token ? <LoginForm props={{ setToken }} /> : <Dashboard props={{ setToken }} />}
+    </>
+  )
 }
 
 export default App;
