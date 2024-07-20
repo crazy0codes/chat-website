@@ -1,27 +1,56 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../styles/index.css';
-import { Input} from './ui/input';
-import { socket } from "../controllers/socket"
+import { Input } from './ui/input';
+import { Context } from '../controllers/context';
+import { socket } from '../controllers/socket';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
+
 
 export function SidePanel() {
+    const { setRoom, room } = useContext(Context)
+    const [rooms, setRooms] = useState(["global"])
+
+    function roomsList(arr) {
+        setRooms(arr)
+    }
+
+    function selectedRoom(e){
+        let option = e.target.innerText;
+        setRoom(option)
+    }
+
     useEffect(() => {
-        socket.on('joinRoom', function (roomID) {
-            socket.join(roomID)
-            console.log(socket.id + " has joined the " + roomID)
-        })
-        
-        socket.on('leaveRoom', function (roomID) {
-            socket.leave(roomID)
-            console.log(socket.id + " has left the " + roomID)
-        })
-    }, [])
+        socket.emit('user-rooms');
+        socket.on("current-rooms",roomsList)
+        return () => {
+            socket.off('current-rooms',roomsList)
+            socket.off('user-rooms');
+        }
+    }, []);
+
+    function handleJoinRoom(e) {
+        e.preventDefault();
+        let roomid = document.querySelector('#join-room').value;
+        setRoom(roomid)
+    }
 
     return (
         <>
-            <Input type="email" placeholder="join room"  className="focus:visible-ring" />
+            <form onSubmit={handleJoinRoom}>
+                <input type="text" placeholder="join room" id="join-room" className="focus:visible-ring" />
+            </form>
             <small className="text-center ml-2">Rooms your in</small>
             <div className="roomsList max-h-[240px] overflow-y-auto m-2 border rounded cursor-pointer">
-             rooms list here
+               <ScrollArea>
+               {rooms.map( ele => {
+                return(
+                    <>
+                        <span onClick={selectedRoom}>{ele}</span>
+                        <br/>
+                    </>
+                )
+               })}
+               </ScrollArea>
             </div>
         </>
     )

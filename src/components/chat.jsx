@@ -1,34 +1,35 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import { Message } from "./ui/message";
 import { Input } from "./ui/input";
 import { socket } from "../controllers/socket";
 import { ScrollArea } from "./ui/scroll-area";
 import { handleMessage } from "../controllers/messageController";
+import { Context } from "../controllers/context";
 
 export function Chat() {
+    const {room} = useContext(Context);
     const [messages, setMessages] = useState([]);
     const messagesEndRef = useRef(null);
 
     useEffect(() => {
+        
         const handleOldMessages = (oldMessages) => {
-            console.log("handling 'old-messages':", oldMessages);
             setMessages(oldMessages);
         };
 
         const handleNewMessage = (msg) => {
-            console.log("handling 'message':", msg);
             setMessages((prev) => [...prev, msg]);
         };
 
+        socket.emit('join-room',room);
         socket.on('old-messages', handleOldMessages);
         socket.on('message', handleNewMessage);
 
         return () => {
-            console.log('cleaning up chat component');
             socket.off('old-messages', handleOldMessages);
             socket.off('message', handleNewMessage);
         };
-    }, []);
+    }, [room]);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
@@ -44,7 +45,10 @@ export function Chat() {
                     <div ref={messagesEndRef} />
                 </ScrollArea>
             </div>
-            <form className="absolute bottom-0 w-full pl-2 pr-2" onSubmit={handleMessage}>
+            <form className="absolute bottom-0 w-full pl-2 pr-2" onSubmit={(e) => {
+                e.preventDefault();
+                handleMessage(room)
+            }}>
                 <Input placeholder="Type a message..." className="mt-2 mb-2" id="user-message" />
             </form>
         </div>

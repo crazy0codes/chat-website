@@ -1,7 +1,12 @@
-import { io } from 'socket.io-client';
+import {io} from 'socket.io-client';
 
-const URL = 'http://localhost:3001';
+const URL = process.env.REACT_APP_URL;
+
+const email = localStorage.getItem('stu_email')
 
 export const socket = io(URL, {
-    autoConnect : false
+    autoConnect : false,
+    query : {
+        email : email
+    }
 });

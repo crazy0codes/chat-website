@@ -8,7 +8,7 @@ function App() {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    let token = sessionStorage.getItem('token')
+    let token = localStorage.getItem('token')
     console.log(token)
     if (Boolean(token)) {
       setToken(Boolean(token))
