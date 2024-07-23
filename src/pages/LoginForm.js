@@ -15,7 +15,7 @@ export function LoginForm({props}) {
     async function handleLogin() {
         let email = document.querySelector('#email').value;
         let password = document.querySelector('#password').value;
-        let jwtToken = localStorage.getItem('token') || null;
+        let jwtToken = sessionStorage.getItem('token') || null;
         const URL = process.env.REACT_APP_URL;
         console.log(URL)
         const data = await fetch(`${URL}/login?email=${email}@sves.org.in&password=${password}`, {
@@ -28,8 +28,8 @@ export function LoginForm({props}) {
         if(data.status == 200){
             const jsonData = await data.json();
             const {validUser} = jsonData
-            localStorage.setItem('token',jsonData.token);
-            localStorage.setItem('stu_email',jsonData.username);
+            sessionStorage.setItem('token',jsonData.token);
+            sessionStorage.setItem('stu_email',jsonData.username);
             setToken(validUser)
         }
         else{

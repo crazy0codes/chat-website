@@ -7,7 +7,7 @@ export function Navbar() {
   const { props } = useContext(Context)
   const {setToken} = props;
   function logout() {
-    localStorage.removeItem('token')
+    sessionStorage.removeItem()
     setToken(false);
   }
   return (
