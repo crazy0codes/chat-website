@@ -17,6 +17,7 @@ export function LoginForm({props}) {
         let password = document.querySelector('#password').value;
         let jwtToken = localStorage.getItem('token') || null;
         const URL = process.env.REACT_APP_URL;
+        console.log(URL)
         const data = await fetch(`${URL}/login?email=${email}@sves.org.in&password=${password}`, {
             method: 'GET',
             headers: {
