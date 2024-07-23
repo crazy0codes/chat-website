@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { Message } from "./ui/message";
 import { Input } from "./ui/input";
-import { socket } from "../controllers/socket";
+import { socket } from '../controllers/socket';
 import { ScrollArea } from "./ui/scroll-area";
 import { handleMessage } from "../controllers/messageController";
 import { Context } from "../controllers/context";

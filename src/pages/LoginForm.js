@@ -11,13 +11,13 @@ import { Label } from "../components/ui/label"
 
 
 export function LoginForm({props}) {
-    let {setToken} = props
+    let {setUser} = props
     async function handleLogin() {
         let email = document.querySelector('#email').value;
         let password = document.querySelector('#password').value;
         let jwtToken = sessionStorage.getItem('token') || null;
         const URL = process.env.REACT_APP_URL;
-        console.log(URL)
+        console.log("server URL : " + URL)
         const data = await fetch(`${URL}/login?email=${email}@sves.org.in&password=${password}`, {
             method: 'GET',
             headers: {
@@ -27,10 +27,14 @@ export function LoginForm({props}) {
         });
         if(data.status == 200){
             const jsonData = await data.json();
-            const {validUser} = jsonData
-            sessionStorage.setItem('token',jsonData.token);
-            sessionStorage.setItem('stu_email',jsonData.username);
-            setToken(validUser)
+            const {username, token} = jsonData;
+            let stu_email = username;
+            sessionStorage.setItem('token',token);
+            sessionStorage.setItem('stu_email',stu_email);
+            setUser(() => ({
+                stu_email,
+                token
+            }))
         }
         else{
             console.log("SERVER CONNECTION => ERROR")

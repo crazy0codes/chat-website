@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../styles/index.css';
-import { Input } from './ui/input';
+// import { Input } from './ui/input';
 import { Context } from '../controllers/context';
 import { socket } from '../controllers/socket';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 
 
 export function SidePanel() {
-    const { setRoom, room } = useContext(Context)
+    const { setRoom} = useContext(Context)
     const [rooms, setRooms] = useState(["global"])
 
     function roomsList(arr) {

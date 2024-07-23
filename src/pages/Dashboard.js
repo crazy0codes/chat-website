@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Navbar } from "../components/ui/navbar";
 import { SidePanel } from "../components/sidepanel";
 import { Chat } from "../components/chat";
-import { socket } from "../controllers/socket";
 import { Context } from "../controllers/context";
+import { socket } from "../controllers/socket";
 
 export function Dashboard({ props }) {
   const [room, setRoom] = useState('global');
 
   useEffect(() => {
     socket.connect();
+    socket.emit("fresh-connection",props.user)
     return () => {
       socket.disconnect();
     };

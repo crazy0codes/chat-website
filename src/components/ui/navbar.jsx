@@ -5,10 +5,13 @@ import { Context } from "../../controllers/context";
 
 export function Navbar() {
   const { props } = useContext(Context)
-  const {setToken} = props;
+  const {setUser} = props;
   function logout() {
-    sessionStorage.removeItem()
-    setToken(false);
+    sessionStorage.removeItem('token')
+    setUser(() => ({
+      stu_email : null,
+      token : null
+    }));
   }
   return (
     <nav className="bg-black col-span-5 h-[100%] mb-2 mr-2 ml-2 flex justify-between items-center pr-2 pl-2 bg-black rounded-[2px]">
