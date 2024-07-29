@@ -12,7 +12,8 @@ import { Label } from "../components/ui/label"
 
 export function LoginForm({ props }) {
     let { setUser } = props
-    async function handleLogin() {
+    async function handleLogin(e) {
+        e.preventDefault();
         let email = document.querySelector('#email').value;
         let password = document.querySelector('#password').value;
         let jwtToken = sessionStorage.getItem('token') || null;

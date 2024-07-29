@@ -14,7 +14,7 @@ export function Dashboard({ props }) {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [props.user]);
 
   return (
     <Context.Provider value={{ room, setRoom, props }}>

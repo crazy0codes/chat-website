@@ -19,7 +19,7 @@ const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
 CardHeader.displayName = "CardHeader"
 
 const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
-<h3 ref={ref} aria-readonly="true" className={cn("text-2xl font-semibold leading-none tracking-tight", className)}>
+<h3 ref={ref}  className={cn("text-2xl font-semibold leading-none tracking-tight", className)}>
   {props.children}
 </h3>
 
