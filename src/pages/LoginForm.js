@@ -42,7 +42,7 @@ export function LoginForm({ props }) {
                 console.log("SERVER CONNECTION => ERROR")
             }
         } catch (error) {
-            console.log("Error :" + error)
+            console.log(error)
         }
     }
 

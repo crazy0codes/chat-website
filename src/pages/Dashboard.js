@@ -10,6 +10,7 @@ export function Dashboard({ props }) {
 
   useEffect(() => {
     socket.connect();
+    console.log(props.user)
     socket.emit("fresh-connection",props.user)
     return () => {
       socket.disconnect();

@@ -15,6 +15,7 @@ export function Chat() {
         
         const handleOldMessages = (oldMessages) => {
             setMessages(oldMessages);
+            console.log(oldMessages)
         };
 
         const handleNewMessage = (msg) => {
