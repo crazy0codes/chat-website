@@ -7,7 +7,7 @@ export function Navbar() {
   const { props } = useContext(Context)
   const {setUser} = props;
   function logout() {
-    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
     setUser(() => ({
       stu_email : null,
       token : null

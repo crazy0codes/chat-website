@@ -11,40 +11,37 @@ import { Label } from "../components/ui/label"
 
 
 export function LoginForm({ props }) {
-    let { setUser } = props
+    const {setUser} = props;
     async function handleLogin(e) {
-        e.preventDefault();
-        let email = document.querySelector('#email').value;
-        let password = document.querySelector('#password').value;
-        let jwtToken = sessionStorage.getItem('token') || null;
-        const URL = process.env.REACT_APP_URL;
-        console.log("server URL : " + URL)
-        try {
-            const data = await fetch(`${URL}/login?email=${email}@sves.org.in&password=${password}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': jwtToken ? `Bearer ${jwtToken}` : null
-                },
-            });
-            if (data.status == 200) {
-                const jsonData = await data.json();
-                const { username, token } = jsonData;
-                let stu_email = username;
-                sessionStorage.setItem('token', token);
-                sessionStorage.setItem('stu_email', stu_email);
-                setUser(() => ({
-                    stu_email,
-                    token
-                }))
-            }
-            else {
-                console.log("SERVER CONNECTION => ERROR")
-            }
-        } catch (error) {
-            console.log(error)
-        }
+  e.preventDefault();
+  let email = document.querySelector('#email').value;
+  let password = document.querySelector('#password').value;
+  let jwtToken = localStorage.getItem('token') || null;
+  const URL = process.env.REACT_APP_URL;
+  console.log("server URL : " + URL);
+  try {
+    const response = await fetch(`${URL}/login?email=${email}@sves.org.in&password=${password}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': jwtToken ? `Bearer ${jwtToken}` : null
+      },
+    });
+    if (response.status === 200) {
+      const jsonData = await response.json();
+      const { username, token } = jsonData;
+      let stu_email = username;
+      localStorage.setItem('token', token);
+      localStorage.setItem('stu_email', stu_email);
+      setUser({ stu_email, token });
+    } else {
+      console.log("SERVER CONNECTION => ERROR");
     }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 
     return (
         <div className="h-screen flex">

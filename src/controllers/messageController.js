@@ -1,7 +1,7 @@
 import { socket } from "./socket";
 
 export function handleMessage(roomID) {
-    let stu_email = sessionStorage.getItem('stu_email');
+    let stu_email = localStorage.getItem('stu_email');
     let msg = document.querySelector('#user-message').value;
     if (msg === '') return;
     document.querySelector('#user-message').value = '';

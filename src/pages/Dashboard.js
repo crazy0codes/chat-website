@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Navbar } from "../components/ui/navbar";
 import { SidePanel } from "../components/sidepanel";
 import { Chat } from "../components/chat";
@@ -7,15 +7,19 @@ import { socket } from "../controllers/socket";
 
 export function Dashboard({ props }) {
   const [room, setRoom] = useState('global');
-
+  const ref = useRef(true)
+  const { user } = props
   useEffect(() => {
     socket.connect();
-    console.log(props.user)
-    socket.emit("fresh-connection",props.user)
     return () => {
       socket.disconnect();
     };
-  }, [props.user]);
+  }, []);
+
+  if(ref){
+    ref.current = false;
+    socket.emit('fresh-connection', user)
+  }
 
   return (
     <Context.Provider value={{ room, setRoom, props }}>

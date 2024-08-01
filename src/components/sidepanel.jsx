@@ -11,6 +11,7 @@ export function SidePanel() {
     const [rooms, setRooms] = useState(["global"])
 
     function roomsList(arr) {
+        console.log("Rooms are ",arr)
         setRooms(arr)
     }
 
@@ -20,7 +21,7 @@ export function SidePanel() {
     }
 
     useEffect(() => {
-        socket.emit('user-rooms');
+        socket.emit('user-rooms',function(){});
         socket.on("current-rooms",roomsList)
         return () => {
             socket.off('current-rooms',roomsList)

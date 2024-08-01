@@ -5,23 +5,20 @@ import { LoginForm } from './pages/LoginForm';
 
 function App() {
   
-  const [user, setUser] = useState({
-    stu_email : null,
-    token : null
-  });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    let token = sessionStorage.getItem('token') || null
-    let stu_email = sessionStorage.getItem('stu_email') || null
+    let token = localStorage.getItem('token') || null
+    let stu_email = localStorage.getItem('stu_email') || null
     if (Boolean(token)) {
-      setUser(prev => ({ token : token, stu_email }))
+      setUser({ token : token, stu_email })
     }
   }, []);
 
   return (
     <>
       {console.log("User", user)}
-      {!user.token? <LoginForm props={{ setUser }} /> : <Dashboard props={{ setUser , user}} />}
+      {!(user && user.token) ? <LoginForm props={{ setUser }} /> : <Dashboard props={{ setUser , user}} />}
     </>
   )
 }
