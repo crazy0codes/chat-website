@@ -10,8 +10,9 @@ function App() {
   useEffect(() => {
     let token = localStorage.getItem('token') || null
     let stu_email = localStorage.getItem('stu_email') || null
+    let username = "";
     if (Boolean(token)) {
-      setUser({ token : token, stu_email })
+      setUser({ token : token, stu_email, username })
     }
   }, []);
 

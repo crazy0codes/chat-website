@@ -5,15 +5,15 @@ import {
 } from "@radix-ui/react-avatar"
 
 export function Message({props}) {
-  let {stu_email, msg, msg_delivered, avatar} = props;
+  let {stu_email, msg, msg_delivered, stu_dp } = props;
   let username = stu_email;
-  avatar = avatar || 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50';
+  stu_dp = stu_dp || 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50';
 
   return (
     <>
       <div className="message-container flex border-slate-200 border-b hover:bg-gray-200 rounded">
         <Avatar>
-          <AvatarImage src={avatar} className="h-[24px] rounded-full m-2" alt="dp" />
+          <AvatarImage src={stu_dp} className="h-[30px] w-[30px] rounded-full m-2" alt="dp" />
           <AvatarFallback>{username}</AvatarFallback>
         </Avatar>
         <div className="flex flex-col">

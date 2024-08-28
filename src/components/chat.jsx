@@ -6,7 +6,7 @@ import { ScrollArea } from "./ui/scroll-area";
 import { handleMessage } from "../controllers/messageController";
 import { Context } from "../controllers/context";
 
-export function Chat() {
+export function Chat({picture}) {
     const {room} = useContext(Context);
     const [messages, setMessages] = useState([]);
     const messagesEndRef = useRef(null);
@@ -19,6 +19,8 @@ export function Chat() {
         };
 
         const handleNewMessage = (msg) => {
+            console.log("handleNewMessage :")
+            console.log(msg)
             setMessages((prev) => [...prev, msg]);
         };
 
@@ -37,9 +39,9 @@ export function Chat() {
     }, [messages]);
 
     return (
-        <div className="relative w-full h-screen pr-2">
+        <div className="relative w-full pr-2">
             <div className="chatRoom w-full bg-white flex-grow">
-                <ScrollArea className="bg-slate-100 h-[calc(100vh-57px)] w-full mt-2 rounded border p-0.5">
+                <ScrollArea className="bg-slate-100 h-[calc(100vh-57px)] w-full mt-2 rounded border p-0.5 pb-[55px]">
                     {messages.map((message, index) => (
                         <Message key={index} props={message} className="msg-box" />
                     ))}
@@ -48,7 +50,7 @@ export function Chat() {
             </div>
             <form className="absolute bottom-0 w-full pl-2 pr-2" onSubmit={(e) => {
                 e.preventDefault();
-                handleMessage(room)
+                handleMessage({room, picture})
             }}>
                 <Input placeholder="Type a message..." className="mt-2 mb-2" id="user-message" />
             </form>
