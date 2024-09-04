@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { socket } from "../../controllers/socket";
 
 
-export function UserAccount(props) {
+export function UserAccount({props}) {
     console.log(props)
     const { setIsDialogOpen, setUser, picture } = props;
     return (
@@ -40,7 +40,8 @@ export function UserAccount(props) {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onSelect={() => setIsDialogOpen(true)} className="gap-2 cursor-pointer">
-                        <UserRoundPen strokeWidth={1} width={20} height={20} /> <p>username</p>
+                        <UserRoundPen strokeWidth={1} width={20} height={20} />
+                         <p>username</p>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem>

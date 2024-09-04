@@ -14,7 +14,6 @@ export function SidePanel() {
     const [rooms, setRooms] = useState(["global"])
 
     function roomsList(arr) {
-        console.log("Rooms are ",arr)
         setRooms(arr)
     }
 
@@ -44,9 +43,6 @@ export function SidePanel() {
         setRoom(roomid)
     }
 
-
-    let DemoRooms = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n"]
-
     return (
         <>
             <form onSubmit={handleJoinRoom}>
@@ -55,7 +51,7 @@ export function SidePanel() {
             <h3 className="bg-blue-500 rounded text-white font-medium h-[38px] flex items-center pl-2 gap-4"><MessagesSquare /><small>rooms your in</small></h3>
             <div className="roomsList max-h-[240px] overflow-y-auto m-2 border rounded cursor-pointer">
                <ScrollArea>
-               {DemoRooms.map( roomName => {
+               {rooms.map( roomName => {
                 return(
                     <>
                     <Room props={

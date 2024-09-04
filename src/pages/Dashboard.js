@@ -25,7 +25,13 @@ export function Dashboard({ props }) {
       setPicture(() => imgUrl);
     });
 
+    //Update changed username
+    socket.on('updated-username', username => {
+      localStorage.setItem('username',username);
+    })
+
     return () => {
+      socket.off('updated-username');
       socket.off('pfp');
       socket.off('fetch-pfp');
       socket.disconnect();

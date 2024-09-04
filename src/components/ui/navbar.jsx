@@ -8,12 +8,12 @@ import { UserAccount } from "./userAccount";
 export function Navbar({ picture }) {
   const { props } = useContext(Context)
   const { setUser } = props;
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  let [isDialogOpen, setIsDialogOpen] = useState(false);
 
-
+  //To update username
   function editUsername() {
-    let newUserName = document.getElementById('edit-username').innerText;
-    socket.emit("edit-username", newUserName);
+    let username = document.getElementById('update-username').value;
+    socket.emit("update-username", username);
   }
 
 
@@ -27,8 +27,18 @@ export function Navbar({ picture }) {
         onChange={changePfp}
       />
       <p className="text-white">chat</p>
-      <UserAccount picture={picture} />
-      <EditProfileDialog isOpen={isDialogOpen} onClose={() => setIsDialogOpen(() => false, null, editUsername)} />
+      <UserAccount
+        props={{
+          picture,
+          setIsDialogOpen,
+          setUser
+        }}
+      />
+      <EditProfileDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        editUsername={editUsername}
+      />
     </nav>
   )
 }

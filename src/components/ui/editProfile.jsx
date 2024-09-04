@@ -26,14 +26,18 @@ export function EditProfileDialog({ isOpen, onClose, editUsername }) {
                             Username
                         </Label>
                         <Input
-                            id="edit-username"
-                            defaultValue="@peduarte"
+                            id="update-username"
                             className="col-span-3"
                         />
                     </div>
                 </div>
                 <DialogFooter>
-                    <Button type="submit" onClick={editUsername}>Save changes</Button>
+                    <Button type="submit" 
+                    onClick={
+                        () => {
+                        editUsername();
+                        onClose();}
+                    }>Save changes</Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

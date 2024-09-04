@@ -1,4 +1,4 @@
-import { LogOutIcon, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import React from 'react'
 
 export default function Room({props}){
@@ -6,7 +6,7 @@ export default function Room({props}){
     const {roomName, selectedRoom, exitRoom} = props;
     return(
         <>
-        <div className='flex justify-between mb-2 m-1 p-1 hover:bg-blue-300 rounded'>
+        <div className='flex justify-between mb-2 m-1 p-1'>
             <p onClick={selectedRoom}>{roomName}</p>
             <X className='text-red-500 exit-Room' onClick={exitRoom}/>
         </div>
