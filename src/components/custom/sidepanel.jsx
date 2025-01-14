@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
-import '../styles/index.css';
-import { Input } from './ui/input';
-import { Context } from '../controllers/context';
-import { socket } from '../controllers/socket';
+import '../../styles/index.css'
+import { Input } from '../ui/input';
+import { Context } from '../../context/context';
+import { socket } from '../../context/socket';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
-import Room from './ui/room';
-import { Button } from './ui/button';
+import Room from '../ui/room';
+import { Button } from '../ui/button';
 import {MessageSquare, MessagesSquare, PhoneCallIcon } from 'lucide-react';
 
 
-export function SidePanel() {
+export function SidePanel({}) {
     const { setRoom} = useContext(Context)
     const [rooms, setRooms] = useState(["global"])
 
@@ -45,8 +45,8 @@ export function SidePanel() {
 
     return (
         <>
-            <form onSubmit={handleJoinRoom}>
-                <Input type="text" placeholder="join room" id="join-room" className="focus:visible-ring mb-1" />
+            <form onSubmit={handleJoinRoom} className='mb-[10px]'>
+                <Input type="text" placeholder="join room" id="join-room" className="focus:visible-ring mb-1 outline-0" />
             </form>
             <h3 className="bg-blue-500 rounded text-white font-medium h-[38px] flex items-center pl-2 gap-4"><MessagesSquare /><small>rooms your in</small></h3>
             <div className="roomsList max-h-[240px] overflow-y-auto m-2 border rounded cursor-pointer">
@@ -54,7 +54,7 @@ export function SidePanel() {
                {rooms.map( roomName => {
                 return(
                     <>
-                    <Room props={
+                    <Room key={roomName} props={
                         {
                         roomName,
                         selectedRoom,

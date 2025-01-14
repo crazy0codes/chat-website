@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { Context } from "../../controllers/context";
-import { socket } from "../../controllers/socket";
-import { EditProfileDialog } from "./editProfile";
+import { Context } from "../../context/context";
+import { socket } from "../../context/socket";
+import { EditProfileDialog } from "../ui/editProfile";
 import { UserAccount } from "./userAccount";
 
 
@@ -18,7 +18,7 @@ export function Navbar({ picture }) {
 
 
   return (
-    <nav className="bg-black col-span-5 h-[100%] mb-2 mr-2 ml-2 flex justify-between items-center pr-2 pl-2 bg-black rounded-[2px]">
+    <nav className="col-span-5 h-[100%] flex justify-between ml-2 mt-1 mr-2 p-2 items-center bg-black rounded-[2px]">
       <input
         id="profile-picture"
         type="file"
@@ -26,7 +26,7 @@ export function Navbar({ picture }) {
         accept="image/*"
         onChange={changePfp}
       />
-      <p className="text-white">chat</p>
+      <h1 className="text-white text-xl">chat</h1>
       <UserAccount
         props={{
           picture,

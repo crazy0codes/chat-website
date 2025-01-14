@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
-import { Message } from "./ui/message";
-import { Input } from "./ui/input";
-import { socket } from '../controllers/socket';
-import { ScrollArea } from "./ui/scroll-area";
-import { handleMessage } from "../controllers/messageController";
-import { Context } from "../controllers/context";
+import { Message } from "../ui/message";
+import { Input } from "../ui/input";
+import { socket } from '../../context/socket';
+import { ScrollArea } from "../ui/scroll-area";
+import { handleMessage } from "../../context/messageController";
+import { Context } from "../../context/context";
 
 export function Chat({picture}) {
     const {room} = useContext(Context);

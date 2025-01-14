@@ -1,4 +1,4 @@
-import { Button } from "./button";
+import { Button } from "../ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,8 +12,8 @@ import {
     LogOutIcon,
     UserRoundPen
 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
-import { socket } from "../../controllers/socket";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { socket } from "../../context/socket";
 
 
 export function UserAccount({props}) {

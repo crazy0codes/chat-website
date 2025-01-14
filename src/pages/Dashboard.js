@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Navbar } from "../components/ui/navbar";
-import { SidePanel } from "../components/sidepanel";
-import { Chat } from "../components/chat";
-import { Context } from "../controllers/context";
-import { socket } from "../controllers/socket";
+import { Navbar } from "../components/custom/navbar";
+import { SidePanel } from "../components/custom/sidepanel";
+import { Chat } from "../components/custom/chat";
+import { Context } from "../context/context";
+import { socket } from "../context/socket";
 
 export function Dashboard({ props }) {
   const [room, setRoom] = useState('global');
